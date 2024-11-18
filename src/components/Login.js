@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 
 const Login = () => {
+    const [isSignInFrom,setisSignInForm]=useState(true);
+    const toggleSigninform = () =>{
+        setisSignInForm(!isSignInFrom)
+    };
   return (
     <div>
       <Header />
@@ -12,10 +16,12 @@ const Login = () => {
         />
       </div>
       <form className="relative top-44 bg-black/80 w-3/12 px-12 py-6 mx-auto text-white rounded">
-        <h1 className="font-bold text-3xl my-4">Sign In</h1>
+        <h1 className="font-bold text-3xl my-4">{isSignInFrom ? "Sign In" : "Sign Up"}</h1>
+        {!isSignInFrom && (<input type="text" placeholder="Full Name" className="px-6 py-4 my-2 w-full rounded bg-transparent border-slate-400 border"/>)}
         <input type="text" placeholder="Email or Mobile Number" className="px-6 py-4 my-2 w-full rounded bg-transparent border-slate-400 border" />
         <input type="text" placeholder="Password" className="px-6 py-4 my-2 w-full rounded bg-transparent border-slate-400 border" />
-        <button className="px-4 py-3 bg-red-700 text-white w-full my-2 rounded font-semibold">Sign In</button>
+        <button className="px-4 py-3 bg-red-700 text-white w-full my-2 rounded font-semibold">{isSignInFrom ? "Sign In" : "Sign Up"}</button>
+        <p onClick={toggleSigninform} className="cursor-pointer">{isSignInFrom ? "New to Netflix ? SignUp Now" : " Already a user ? Sign In Now"}</p>
       </form>
     </div>  
   );
