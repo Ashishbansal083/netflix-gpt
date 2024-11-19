@@ -4,13 +4,16 @@ import { checkValidateData } from "../utils/Validate";
 
 const Login = () => {
   const [isSignInFrom, setisSignInForm] = useState(true);
+  const [errorMessage,seterrorMessage] = useState(null);
   const toggleSigninform = () => {
     setisSignInForm(!isSignInFrom);
   };
   const email = useRef(null);
   const password = useRef(null);
   const handleButtonClick = () => {
-    checkValidateData(email, password);
+    const message = checkValidateData(email.current.value, password.current.value);
+    seterrorMessage(message)
+    
   };
   return (
     <div>
@@ -21,7 +24,7 @@ const Login = () => {
           alt="background-img"
         />
       </div>
-      <form className="relative top-44 bg-black/80 w-3/12 px-12 py-6 mx-auto text-white rounded">
+      <form className="relative top-44 bg-black/80 w-3/12 px-12 py-6 mx-auto text-white rounded" onSubmit={(e)=>{e.preventDefault()}}>
         <h1 className="font-bold text-3xl my-4">
           {isSignInFrom ? "Sign In" : "Sign Up"}
         </h1>
@@ -40,10 +43,11 @@ const Login = () => {
         />
         <input
           ref={password}
-          type="text"
+          type="password"
           placeholder="Password"
           className="px-6 py-4 my-2 w-full rounded bg-transparent border-slate-400 border"
         />
+        <p className="text-red-500 font-semibold">{errorMessage}</p>
         <button
           className="px-4 py-3 bg-red-700 text-white w-full my-2 rounded font-semibold"
           onClick={handleButtonClick}
