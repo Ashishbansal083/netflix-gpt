@@ -48,11 +48,13 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          // ...
+          console.log(user);
+          seterrorMessage("sign in success");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          seterrorMessage(errorCode + "-" +errorMessage);
         });
     }
   };
