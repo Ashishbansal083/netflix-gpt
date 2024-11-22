@@ -1,19 +1,60 @@
 import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidateData } from "../utils/Validate";
+import { auth } from "../utils/Firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const Login = () => {
   const [isSignInFrom, setisSignInForm] = useState(true);
-  const [errorMessage,seterrorMessage] = useState(null);
+  const [errorMessage, seterrorMessage] = useState(null);
   const toggleSigninform = () => {
     setisSignInForm(!isSignInFrom);
   };
   const email = useRef(null);
   const password = useRef(null);
   const handleButtonClick = () => {
-    const message = checkValidateData(email.current.value, password.current.value);
-    seterrorMessage(message)
-    
+    const message = checkValidateData(
+      email.current.value,
+      password.current.value
+    );
+    seterrorMessage(message);
+    if (message) return;
+
+    if (!isSignInFrom) {
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          seterrorMessage(errorCode + "-" +errorMessage);
+        });
+    } else {
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    }
   };
   return (
     <div>
@@ -24,7 +65,12 @@ const Login = () => {
           alt="background-img"
         />
       </div>
-      <form className="relative top-44 bg-black/80 w-3/12 px-12 py-6 mx-auto text-white rounded" onSubmit={(e)=>{e.preventDefault()}}>
+      <form
+        className="relative top-44 bg-black/80 w-3/12 px-12 py-6 mx-auto text-white rounded"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <h1 className="font-bold text-3xl my-4">
           {isSignInFrom ? "Sign In" : "Sign Up"}
         </h1>
