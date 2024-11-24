@@ -5,6 +5,7 @@ import { auth } from "../utils/Firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +16,7 @@ const Login = () => {
   const toggleSigninform = () => {
     setisSignInForm(!isSignInFrom);
   };
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
   const handleButtonClick = () => {
@@ -27,19 +29,31 @@ const Login = () => {
 
     if (!isSignInFrom) {
       createUserWithEmailAndPassword(
-        auth,
+        auth,        
         email.current.value,
         password.current.value
       )
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          navigate('/browse');
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/91095154?v=4",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+            })
+            .catch((error) => {
+              // An error occurred
+              // ...
+            });
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          seterrorMessage(errorCode + "-" +errorMessage);
+          seterrorMessage(errorCode + "-" + errorMessage);
         });
     } else {
       signInWithEmailAndPassword(
@@ -50,12 +64,13 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          navigate('/browse');
+          console.log(user)
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          seterrorMessage(errorCode + "-" +errorMessage);
+          seterrorMessage(errorCode + "-" + errorMessage);
         });
     }
   };
@@ -79,6 +94,7 @@ const Login = () => {
         </h1>
         {!isSignInFrom && (
           <input
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="px-6 py-4 my-2 w-full rounded bg-transparent border-slate-400 border"
