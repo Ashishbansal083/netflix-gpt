@@ -44,7 +44,7 @@ const Login = () => {
             photoURL: "https://avatars.githubusercontent.com/u/91095154?v=4",
           })
             .then(() => {
-              const { uid, email, displayName, photoURL } = user;
+              const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(
                 addUser({
                   uid: uid,
