@@ -20,7 +20,7 @@ const Header = () => {
       });
   };
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscibe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate('/browse') 
         const { uid, email, displayName, photoURL } = user;
@@ -41,6 +41,7 @@ const Header = () => {
 
       }
     });
+    return ()=> unsubscibe();
   }, []);
 
   return (
