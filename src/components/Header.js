@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { addUser,removeUser } from "../utils/UserSlice";
 import { useDispatch } from "react-redux";
+import { LOGO } from "../utils/Constants";
 
 
 const Header = () => {
@@ -20,7 +21,7 @@ const Header = () => {
       });
   };
   useEffect(() => {
-    const unsubscibe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigate('/browse') 
         const { uid, email, displayName, photoURL } = user;
@@ -41,7 +42,7 @@ const Header = () => {
 
       }
     });
-    return ()=> unsubscibe();
+    return ()=> unsubscribe();
   }, []);
 
   return (
@@ -49,7 +50,7 @@ const Header = () => {
       <div>
         <img
           className="w-40 "
-          src="https://images.ctfassets.net/y2ske730sjqp/821Wg4N9hJD8vs5FBcCGg/9eaf66123397cc61be14e40174123c40/Vector__3_.svg?w=460"
+          src={LOGO}
           alt="logo"
         />
       </div>
