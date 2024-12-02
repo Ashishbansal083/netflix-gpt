@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
-import { useDispatch } from "react-redux";
-import { removeUser } from "../utils/UserSlice";
+import { FETCH_OPTIONS } from "../utils/Constants";
 
 const Browse = () => {
+  const fetchApi = async()=>{
+    const data = await fetch("https://api.themoviedb.org/3/movie/now_playing?page=1",FETCH_OPTIONS);
+    const json = await data.json();
+    console.log(json);
+
+  }
+  useEffect(()=>{
+    fetchApi();
+  },[]);
   
-  const dispatch = useDispatch();
   return (
     <div>
       <Header />
