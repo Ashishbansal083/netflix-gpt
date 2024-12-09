@@ -5,11 +5,13 @@ import Maincontainer from "./Maincontainer";
 import Secondrycontainer from "./Secondrycontainer"
 import usePopulermovies from "../hooks/usePopulermovies";
 import useTopratedmovies from "../hooks/useTopratedmovies";
+import useUpcomingmovies from "../hooks/useUpcomingmovies";
 
 const Browse = () => {
   useNowplayingmovies();
   usePopulermovies();
   useTopratedmovies();
+  useUpcomingmovies();
   
 
   return (
