@@ -6,11 +6,12 @@ import { useSelector } from "react-redux";
 import { addUser,removeUser } from "../utils/UserSlice";
 import { useDispatch } from "react-redux";
 import { LOGO, PHOTO_URL } from "../utils/Constants";
+import { togleGptSearchView } from "../utils/GptSlice";
 
 
 const Header = () => {
   const dispatch = useDispatch();
-  const user = useSelector(store=>store.user);
+  const user = useSelector(store=>store.user);  
   const navigate = useNavigate();
   const handleSignout = () => {    
     signOut(auth)
@@ -20,6 +21,9 @@ const Header = () => {
         navigate('/error')
       });
   };
+  const handleGptSearchView=()=>{
+    dispatch(togleGptSearchView())
+  }
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -55,6 +59,7 @@ const Header = () => {
         />
       </div>
       {user && <div className="flex">
+        <button className=" px-4 mx-4 rounded-md bg-violet-500 text-white font-semibold" onClick={handleGptSearchView}>GPT Search</button>
         <img className='w-8 h-8'    src={user.photoURL||"https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"} alt="profile photo"></img>
         <button className="text-white font-semibold mx-3" onClick={handleSignout}>SignOut</button>
       </div>}
