@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/UserSlice";
-import { PHOTO_URL } from "../utils/Constants";
+import { BG_URL, PHOTO_URL } from "../utils/Constants";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -86,7 +86,7 @@ const Login = () => {
       <Header />
       <div className="absolute">
         <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/03ad76d1-e184-4d99-ae7d-708672fa1ac2/web/IN-en-20241111-TRIFECTA-perspective_149877ab-fcbd-4e4f-a885-8d6174a1ee81_small.jpg"
+          src={BG_URL}
           alt="background-img"
         />
       </div>
