@@ -7,6 +7,7 @@ import { addUser, removeUser } from "../utils/UserSlice";
 import { useDispatch } from "react-redux";
 import { languages, LOGO, PHOTO_URL } from "../utils/Constants";
 import { togleGptSearchView } from "../utils/GptSlice";
+import { changeLanguage } from "../utils/LanguageSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const Header = () => {
     dispatch(togleGptSearchView());
   };
   const handleLanguageChange = (e)=>{
-     
+    dispatch(changeLanguage(e.target.value));
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
