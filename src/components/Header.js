@@ -13,6 +13,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
+  const showGptsearch = useSelector(store=>store.gpt.GptSearchView);
   const handleSignout = () => {
     signOut(auth)
       .then(() => {})
@@ -56,14 +57,14 @@ const Header = () => {
       </div>
       {user && (
         <div className="flex">
-          <select className="bg-black rounded-md text-white p-2" onChange={handleLanguageChange}>
+          {showGptsearch && <select className="bg-black rounded-md text-white p-2" onChange={handleLanguageChange}>
             {languages.map((lang) => 
               (<option key={lang.identifier} value={lang.identifier}>
                 {lang.name}
               </option>
               )
             )}
-          </select>
+          </select>}
           <button
             className=" px-4 mx-4 rounded-md bg-violet-500 text-white font-semibold"
             onClick={handleGptSearchView}
