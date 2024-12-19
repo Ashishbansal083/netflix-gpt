@@ -83,12 +83,9 @@ const Login = () => {
   };
   return (
     <div>
-      <Header />
+      <Header />      
       <div className="absolute">
-        <img
-          src={BG_URL}
-          alt="background-img"
-        />
+        <img src={BG_URL} alt="background-img" />
       </div>
       <form
         className="relative top-44 bg-black/80 w-3/12 px-12 py-6 mx-auto text-white rounded"
