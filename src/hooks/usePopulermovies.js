@@ -11,7 +11,7 @@ const usePopulermovies = ()=>{
       FETCH_OPTIONS
     );
     const json = await data.json();
-    console.log(json);
+    
     dispatch(addPopulermovie(json.results));
   };
   useEffect(() => {
