@@ -7,16 +7,20 @@ const GptSearchBar = () => {
   const searchText = useRef(null);
   const PreferLang = useSelector((store) => store.config.lang_key);
   const handleSearch = async () => {
-    const completion = await OpenAi.chat.completions.create({
+    const gptQuery =
+      "Act as a movie recommendation systum and suggest some movies for the query :" +
+      searchText.current.value +
+      ".only give me the name of five movies comma separated like the example given ahead.Example given:Don,sholey,Gadar,Golmaal,Koi mil gaya";
+    const gptResults = await OpenAi.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",
-          content:searchText.current.value
+          content: gptQuery,
         },
       ],
     });
-    console.log(completion.choices[0].message);
+    console.log(gptResults.choices[0].message.content);
   };
   return (
     <div className="flex justify-center  pt-[10%] ">
