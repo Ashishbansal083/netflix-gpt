@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { lang } from "../utils/LanguageConsts";
 import OpenAi from "../utils/OpenAi";
 import { FETCH_OPTIONS } from "../utils/Constants";
 
 const GptSearchBar = () => {
   const searchText = useRef(null);
+  const dispatch = useDispatch();
   const PreferLang = useSelector((store) => store.config.lang_key);
   const searchMoviestmdb=async(movie)=>{
     const data = await fetch("https://api.themoviedb.org/3/search/movie?query="+movie+"&include_adult=false&language=en-US&page=1",FETCH_OPTIONS);
@@ -33,7 +34,9 @@ const GptSearchBar = () => {
 
     const GptMoviesResult = gptMovies.map((movie)=>searchMoviestmdb(movie));
     const gptPromiseResult =await Promise.all(GptMoviesResult);
-    console.log(gptPromiseResult);
+
+    
+    dispatch({movieNames:gptMovies,searchResults:gptPromiseResult})   ;
 
   };
   return (
