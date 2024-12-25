@@ -21,6 +21,6 @@ const GptSlice = createSlice({
     }
 })
 
-export  const {togleGptSearchView} = GptSlice.actions;
+export  const {togleGptSearchView,addgptMovieResults} = GptSlice.actions;
 
 export default GptSlice.reducer;

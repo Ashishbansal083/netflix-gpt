@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { lang } from "../utils/LanguageConsts";
 import OpenAi from "../utils/OpenAi";
 import { FETCH_OPTIONS } from "../utils/Constants";
+import { addgptMovieResults } from "../utils/GptSlice";
 
 const GptSearchBar = () => {
   const searchText = useRef(null);
@@ -36,7 +37,7 @@ const GptSearchBar = () => {
     const gptPromiseResult =await Promise.all(GptMoviesResult);
 
     
-    dispatch({movieNames:gptMovies,searchResults:gptPromiseResult})   ;
+    dispatch(addgptMovieResults({movieNames:gptMovies,searchResults:gptPromiseResult}));
 
   };
   return (
