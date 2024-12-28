@@ -1,10 +1,12 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPopulermovie } from "../utils/movieSlice";
 import { FETCH_OPTIONS } from "../utils/Constants";
 import { useEffect } from "react";
 
 const usePopulermovies = ()=>{
     const dispatch = useDispatch();
+    const popularMovies = useSelector(store=>store.movie.Populermovies);
+
   const fetchApi = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
@@ -15,7 +17,7 @@ const usePopulermovies = ()=>{
     dispatch(addPopulermovie(json.results));
   };
   useEffect(() => {
-    fetchApi();
+    !popularMovies && fetchApi();
   }, []);
 }
 
