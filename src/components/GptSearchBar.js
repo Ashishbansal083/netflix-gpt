@@ -31,7 +31,7 @@ const GptSearchBar = () => {
     // console.log(gptResults.choices[0].message.content);
     // const gptMovies = gptResults.choices[0].message.content.split(",");
     //the Above part is commented due to the reason thhat OpenAi api's are paid and if used the app not work proper so we are using hard coded data.
-    const gptMovies = ["gadar" , "Don" , "sholey" , "Golmaal" , "Koi Mil Gya"]
+    const gptMovies = ["gadar" , "Don" , "sholey" , "Golmaal" , "hero"]
 
     const GptMoviesResult = gptMovies.map((movie)=>searchMoviestmdb(movie));
     const gptPromiseResult =await Promise.all(GptMoviesResult);
@@ -43,7 +43,7 @@ const GptSearchBar = () => {
   return (
     <div className="flex justify-center  pt-[40%] sm:pt-[10%]">
       <form
-        className="bg-black  p-2 w-[80%] grid grid-cols-12 rounded-md gap-2 sm:w-[50%] "
+        className="bg-black  p-2 w-full grid grid-cols-12 rounded-md gap-2 sm:w-[50%] "
         onSubmit={(e) => e.preventDefault()}
       >
         <input

@@ -5,9 +5,9 @@ const Movielist = ({ title, movie }) => {
   
   return (
     <div className="">
-      <h1 className="font-semibold text-3xl py-6 px-6 text-white ">{title}</h1>
+      <h1 className="font-semibold text-lg py-6 px-6 text-white md:text-3xl">{title}</h1>
       <div className="flex overflow-x-scroll px-4 no-scrollbar">
-        <div className="flex ">
+        <div className="flex gap-2">
           {movie?.map((movie,index) => (
             <Moviecard
               key={index}
