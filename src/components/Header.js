@@ -13,7 +13,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
-  const showGptsearch = useSelector(store=>store.gpt.GptSearchView);
+  const showGptsearch = useSelector((store) => store.gpt.GptSearchView);
   const handleSignout = () => {
     signOut(auth)
       .then(() => {})
@@ -24,7 +24,7 @@ const Header = () => {
   const handleGptSearchView = () => {
     dispatch(togleGptSearchView());
   };
-  const handleLanguageChange = (e)=>{
+  const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
   useEffect(() => {
@@ -51,40 +51,46 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute bg-gradient-to-b from-black  py-6 z-10 w-screen flex flex-col justify-between gap-4 sm:flex-row px-20">
+    <div className="absolute bg-gradient-to-b from-black px-0  py-6 z-10 w-screen flex flex-col justify-between gap-4 sm:flex-row md:px-20">
       <div className="mx-auto sm:mx-0">
         <img className="w-40 " src={LOGO} alt="logo" />
       </div>
       {user && (
-        <div className="flex">
-          {showGptsearch && <select className="bg-black rounded-md text-white p-2" onChange={handleLanguageChange}>
-            {languages.map((lang) => 
-              (<option key={lang.identifier} value={lang.identifier}>
-                {lang.name}
-              </option>
-              )
-            )}
-          </select>}
+        <div className="flex justify-between">
+          {showGptsearch && (
+            <select
+              className="bg-black rounded-md text-white p-2"
+              onChange={handleLanguageChange}
+            >
+              {languages.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+          )}
           <button
             className=" px-4 mx-4 rounded-md bg-violet-500 text-white font-semibold"
             onClick={handleGptSearchView}
           >
             {showGptsearch ? "Back to home" : "GPT Search"}
           </button>
-          <img
-            className="w-8 h-8"
-            src={
-              user.photoURL ||
-              "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
-            }
-            alt="profile photo"
-          ></img>
-          <button
-            className="text-white font-semibold mx-3"
-            onClick={handleSignout}
-          >
-            SignOut
-          </button>
+          <div className="flex">
+            <img
+              className="w-8 h-8"
+              src={
+                user.photoURL ||
+                "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+              }
+              alt="profile photo"
+            ></img>
+            <button
+              className="text-white font-semibold mx-3 text-center"
+              onClick={handleSignout}
+            >
+              SignOut
+            </button>
+          </div>
         </div>
       )}
     </div>
