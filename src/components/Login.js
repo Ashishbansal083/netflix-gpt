@@ -85,11 +85,11 @@ const Login = () => {
     <div>
       <Header /> 
          
-      <div className="absolute">
-        <img src={BG_URL} alt="background-img" />
+      <div className="absolute ">
+        <img src={BG_URL} alt="background-img" className="h-screen object-cover" />
       </div>
       <form
-        className="relative top-44 bg-black/80 w-3/12 px-12 py-6 mx-auto text-white rounded"
+        className="relative top-44 bg-black/80 w-full md:w-3/12 px-12 py-6 mx-auto text-white rounded"
         onSubmit={(e) => {
           e.preventDefault();
         }}
