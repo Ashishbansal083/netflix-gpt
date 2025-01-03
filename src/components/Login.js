@@ -86,7 +86,7 @@ const Login = () => {
       <Header /> 
          
       <div className="absolute ">
-        <img src={BG_URL} alt="background-img" className="h-screen object-cover" />
+        <img src={BG_URL} alt="background-img" className="h-screen object-cover lg:h-auto " />
       </div>
       <form
         className="relative top-44 bg-black/80 w-full md:w-3/12 px-12 py-6 mx-auto text-white rounded"
